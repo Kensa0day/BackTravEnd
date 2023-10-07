@@ -5,14 +5,9 @@ const Product = require('./models/productModel')
 const dotenv = require('dotenv').config();
 const app = express()
 const connectDB = require('./connectMongo')
-const PORT = process.env.PORT
 
 connectDB();
 
-
-
-
-app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
@@ -87,9 +82,10 @@ app.delete('/products/:id', async(req, res) => {
     }
 })
 
-
-mongoose.set("strictQuery", false)
-app.listen(PORT, () =>console.log(`Server running on port: http://localhost:${PORT}`));
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+    console.log("Server is running on port " + PORT)
+})
 // mongoose
 // .connect('mongodb+srv://Kens0day:kens0day@cluster0.rtupcjj.mongodb.net/Node-API?retryWrites=true&w=majority')
 // // mongoose.connect('mongodb://localhost:27017/Node-API')
